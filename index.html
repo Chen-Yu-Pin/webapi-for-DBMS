@@ -1,0 +1,126 @@
+<html>
+  <head>
+      <link rel = "stylesheet" href="hehe.css">
+      <title>hi</title>
+  </head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <body >
+    <div class="bg">
+        <img src="9c25048e77b4d0b0b9eb617d1ff5e3e0.png">
+    </div>
+      <header >
+          <center><h1 id ="top_text">測試文黨</h1></center></header> 
+          <div class="top"></div>
+      </header>
+      <main>
+        <div class="inputs">
+            <input id="name" placeholder="hehe">
+            <script>
+                var text = document.getElementById("top_text")
+                var i = document.getElementById("name");
+                i.onclick = showalert;
+                console.log("hello")
+                function showalert(event){
+                    document.addEventListener('keypress', run);
+                }
+                function run(e){
+                    if(e.code == "Enter"){
+                        console.log()
+                        text.textContent =i.value+"是gay的鐵證";
+                    }
+                }
+            </script>
+            <form class="buttons">
+                    <input  type="datetime-local" name='date' id="date">
+                    <textarea name='detail' id="detail" placeholder="請輸入紀錄"></textarea><br>
+                    <a class="rainbow"><button type="button"style="width:60px;height:40px;background-color:transparent;border:none margin-top:10px text-align:center"  id="add"><h3>新增</button></a></h3>
+                    <a class="rainbow"><button type="button"style="width:60px;height:40px;background-color:transparent;border:none margin-top:10px text-align:center"  id="search"><h3>查詢</button></a></h3>
+            </form>
+        </div >
+        <div id="result"></div>
+      </main>   
+      <footer>
+          <div class = "foot"><a class="rainbow"><center>2022 陳育斌 楊子慶</a> </div>
+      </footer>
+
+  </body>
+  <script >
+    $(document).ready(function() {
+        $("#search").trigger("click")
+        
+    })
+    $("#search").click(()=>{
+        let item={
+            date:$("#date").val(),
+            detail:$("#detail").val(),
+        }
+        $.ajax({
+            url:'/gay',
+            type:"GET",
+            data:item,
+            success:(res)=>{
+                printAndUpdateAndDel(res)
+                $("#date").val("value")=="yyyy-MM-ddThh:mm";
+                $("#detail").val("");
+            }
+        })
+    })
+    $("#add").click(()=>{
+        let item={
+            date:$("#date").val(),
+            detail:$("#detail").val(),
+        }
+        console.log(typeof item);
+        $.ajax({
+            url:'/gay',
+            type:"POST",
+            data:JSON.stringify(item),
+            success:(res)=>{
+                $("#date").val("value")=="yyyy-MM-ddThh:mm";
+                $("#detail").val("");
+                location.reload();
+                window.alert(res);
+            }
+        })
+    })
+    function printAndUpdateAndDel(res){
+        let tt=JSON.parse(res);
+        $("#result").html("");
+        for(key in tt){
+            $("#result").append(`<div name="${tt[key].Time}" class="rainbow">on ${tt[key].Time} ${tt[key].WhatHeDo} \t 
+                <input type="button" class="update" value="修改" id="${tt[key].Time}">
+                <input type="button" class="delete" value="刪除" id="${tt[key].Time}"></div>`);
+        }
+        $(".update").click(function(){
+            let item={
+                date:$("#date").val(),
+                detail:$("#detail").val(),
+                current:$(this).attr("id")
+            }
+            console.log($(this).attr("id"));
+            $.ajax({
+                url:'/gay',
+                type:"PUT",
+                data:JSON.stringify(item),
+                success:(res)=>{
+                    location.reload();
+                    window.alert(res);
+                }
+            })
+        })
+        $(".delete").click(function(){
+            console.log($(this).attr("id"));
+            $.ajax({
+                url:'/gay',
+                type:"DELETE",
+                data:JSON.stringify({date:$(this).attr("id")}),
+                success:(res)=>{
+                    location.reload();
+                    window.alert(res);
+                }
+            })
+            $(`div[name='${$(this).attr("id")}']`).remove();
+        })
+    }
+</script>
+</html>

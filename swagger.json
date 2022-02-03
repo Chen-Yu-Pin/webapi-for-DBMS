@@ -1,0 +1,157 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "DBMS final",
+      "description": "啊我就要測試阿",
+      "version": "0.0.1"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/",
+        "description": "Local server"
+        }
+    ],
+    "paths": {
+        "/gay":{
+            "get": {
+                "tags": [
+                  ],"parameters": [
+                    { 
+                        "in": "query",
+                        "name":"date",
+                        "require":true,
+                        "schema":{
+                            
+                        "type":[
+                            "String"
+                        ]
+                        },
+                        "default":"null"
+                    },{ 
+                        "in": "query",
+                        "name":"detail",
+                        "require":true,
+                        "schema":{
+                            "type":[
+                                "String"
+                            ]
+                        },
+                        "default":"null"
+                    }
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "OK",
+                      "schema": {
+                        "$ref": "#/definitions/gay"
+                      }
+                    }
+                  }
+            },
+            "post":{
+                "tags": [
+                ], 
+                "requestBody": {
+                    "description": "testObject",
+                    "required": true,
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                            "$ref": "#/definitions/gay"
+                        }
+                      }
+                    }
+                  },
+                  "responses": {
+                    "200": {
+                      "description": "OK",
+                      "schema": {
+                        "$ref": "#/definitions/gay"
+                      }
+                    }
+                  
+                    }
+        },
+            "put":{
+                "tags": [
+                ], 
+                "requestBody": {
+                    "description": "testObject",
+                    "required": true,
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "date": {
+                                    "type": "string"
+                                },
+                                "detail": {
+                                    "type": "string"
+                                },
+                                "current":{
+                                    "type": "string"
+                                }
+                            }   
+                        }
+                      }
+                    }
+                  },
+                "responses": {
+                    "200": {
+                      "description": "OK",
+                      "schema": {
+                        "$ref": "#/definitions/gay"
+                      }
+                    }
+                }   
+            },
+            "delete":{
+                "tags": [
+                ], 
+                "requestBody": {
+                    "description": "testObject",
+                    "required": true,
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "date": {
+                                    "type": "string"
+                                }
+                            }   
+                        }
+                      }
+                    }
+                  },
+                  "responses": {
+                    "200": {
+                      "description": "OK",
+                      "schema": {
+                        "$ref": "#/definitions/gay"
+                      }
+                    }
+                }
+            }
+        }
+    
+    
+     
+
+},
+    "definitions": {
+        "gay": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "detail": {
+                    "type": "string"
+                }
+            }   
+        }  
+    }
+}
+    
