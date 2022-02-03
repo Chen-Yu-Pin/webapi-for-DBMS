@@ -1,2 +1,4 @@
 # webapi-for-DBMS
-DBMS final
+DBMS final project
+
+run the app.js to execute this project
