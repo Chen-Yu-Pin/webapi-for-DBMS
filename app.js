@@ -14,7 +14,7 @@ console.log(__dirname.toString());
 const con=mysql.createConnection({
     host:'localhost',
     user:'bing',
-    password:'std971512737',
+    password:'********',
     database:'9ay',
     port:3301,
     timezone:'08:00'
